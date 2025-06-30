@@ -1,0 +1,19 @@
+<mat-card class="card-hover overflow-hidden">
+  <img [src]="post.image" 
+       [alt]="post.title" 
+       class="w-full h-48 object-cover">
+  <mat-card-content class="p-6">
+    <div class="flex items-center justify-between mb-3" *ngIf="showCategory">
+      <span class="text-xs bg-primary-100 text-primary-800 px-2 py-1 rounded">
+        {{ post.category }}
+      </span>
+      <span class="text-xs text-gray-500">{{ post.date }}</span>
+    </div>
+    <h3 [class]="titleClass">{{ post.title }}</h3>
+    <p [class]="excerptClass">{{ post.excerpt }}</p>
+    <button mat-button class="text-primary-600" [class]="buttonClass">
+      {{ buttonText }}
+      <mat-icon class="ml-1" [class]="iconClass">arrow_forward</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>

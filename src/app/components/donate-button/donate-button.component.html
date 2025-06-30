@@ -1,0 +1,12 @@
+<button 
+  mat-raised-button 
+  [class]="buttonClass"
+  [disabled]="disabled"
+  (click)="onDonateClick()"
+  [attr.aria-label]="ariaLabel">
+  
+  <mat-icon *ngIf="showIcon" class="mr-2">{{ icon }}</mat-icon>
+  {{ buttonText }}
+  
+  <mat-icon *ngIf="showArrow" class="ml-2">arrow_forward</mat-icon>
+</button>

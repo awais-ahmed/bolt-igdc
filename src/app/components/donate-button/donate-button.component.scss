@@ -1,0 +1,58 @@
+@import '../../../styles/colors';
+
+:host {
+  display: inline-block;
+}
+
+.donate-primary {
+  background-color: $orange-500;
+  color: $white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: $shadow-lg;
+  
+  &:hover {
+    background-color: $orange-600;
+    box-shadow: $shadow-xl;
+  }
+}
+
+.donate-secondary {
+  background-color: $white;
+  color: $orange-500;
+  font-weight: 500;
+  border: 1px solid $orange-500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: $gray-50;
+  }
+}
+
+.donate-large {
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+}
+
+.donate-medium {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.donate-small {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.donate-pulse {
+  animation: pulse-orange 2s infinite;
+}
+
+@keyframes pulse-orange {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+  }
+}

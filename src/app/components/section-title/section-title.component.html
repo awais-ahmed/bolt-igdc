@@ -1,0 +1,7 @@
+<div [class]="containerClass">
+  <h2 [class]="titleClass">
+    {{ title }}
+    <span class="text-gradient" *ngIf="highlightedText">{{ highlightedText }}</span>
+  </h2>
+  <p [class]="descriptionClass" *ngIf="description">{{ description }}</p>
+</div>

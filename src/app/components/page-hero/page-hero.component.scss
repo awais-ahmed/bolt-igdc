@@ -1,0 +1,37 @@
+@import '../../../styles/colors';
+
+.section-padding {
+  padding: 4rem 1rem;
+  
+  @media (min-width: 640px) {
+    padding: 4rem 1.5rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 4rem 2rem;
+  }
+}
+
+.page-hero {
+  .content {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+    
+    &.text-white {
+      color: $white;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+  }
+}

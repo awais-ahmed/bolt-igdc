@@ -1,0 +1,40 @@
+<section class="section-padding" [class]="sectionClass">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div [class.order-2]="imageOnLeft" [class.lg:order-1]="imageOnLeft">
+        <img [src]="imageUrl" 
+             [alt]="imageAlt" 
+             class="rounded-lg shadow-xl w-full h-96 object-cover">
+      </div>
+      
+      <div [class.order-1]="imageOnLeft" [class.lg:order-2]="imageOnLeft">
+        <h2 [class]="titleClass">
+          {{ title }}
+          <span class="text-gradient" *ngIf="highlightedTitle">{{ highlightedTitle }}</span>
+        </h2>
+        <div [class]="textClass">
+          <p *ngFor="let paragraph of paragraphs" class="mb-6 leading-relaxed">
+            {{ paragraph }}
+          </p>
+        </div>
+        
+        <!-- Use donate button component if it's a donation button -->
+        <app-donate-button 
+          *ngIf="showButton && isDonateButton"
+          [buttonText]="buttonText"
+          [variant]="donateVariant"
+          [size]="'medium'"
+          (donateClick)="onButtonClick()">
+        </app-donate-button>
+        
+        <!-- Regular button for other actions -->
+        <button mat-raised-button 
+                [class]="buttonClass"
+                *ngIf="showButton && !isDonateButton"
+                (click)="onButtonClick()">
+          {{ buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

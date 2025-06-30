@@ -1,0 +1,39 @@
+<section class="relative min-h-screen flex items-center justify-center" 
+         [class]="backgroundClass">
+  <div class="absolute inset-0 bg-black opacity-40" *ngIf="showOverlay"></div>
+  <div class="absolute inset-0 bg-cover bg-center" 
+       [style.background-image]="'url(' + backgroundImage + ')'"
+       *ngIf="backgroundImage">
+  </div>
+  
+  <div class="relative z-10 text-center max-w-4xl mx-auto px-4" 
+       [class.text-white]="isWhiteText">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+      {{ title }}
+      <span class="text-gradient bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent"
+            *ngIf="highlightedTitle">
+        <br>{{ highlightedTitle }}
+      </span>
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed">
+      {{ description }}
+    </p>
+    
+    <!-- Use donate button component if it's a donation button -->
+    <app-donate-button 
+      *ngIf="showButton && isDonateButton"
+      [buttonText]="buttonText"
+      [size]="'large'"
+      [pulse]="true"
+      (donateClick)="onButtonClick()">
+    </app-donate-button>
+    
+    <!-- Regular button for other actions -->
+    <button mat-raised-button 
+            class="btn-primary text-lg px-8 py-4"
+            *ngIf="showButton && !isDonateButton"
+            (click)="onButtonClick()">
+      {{ buttonText }}
+    </button>
+  </div>
+</section>

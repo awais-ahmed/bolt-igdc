@@ -1,0 +1,9 @@
+<mat-card class="card-hover overflow-hidden">
+  <img [src]="facility.image" 
+       [alt]="facility.title" 
+       class="w-full h-48 object-cover">
+  <mat-card-content class="p-6">
+    <h3 class="text-xl font-semibold mb-3">{{ facility.title }}</h3>
+    <p class="text-gray-600 text-sm">{{ facility.description }}</p>
+  </mat-card-content>
+</mat-card>

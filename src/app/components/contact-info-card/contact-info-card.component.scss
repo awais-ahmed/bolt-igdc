@@ -1,0 +1,15 @@
+// Contact info card component styles
+.flex {
+  &.flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}

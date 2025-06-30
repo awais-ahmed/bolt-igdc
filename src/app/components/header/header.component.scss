@@ -1,0 +1,141 @@
+@import '../../../styles/colors';
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  transition: all 0.3s ease;
+  
+  &.bg-white\/95 {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  &.bg-black\/20 {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  &.backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+}
+
+.top-bar {
+  background-color: $primary-800;
+  color: $white;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    
+    a {
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $primary-200;
+      }
+    }
+  }
+  
+  .prayer-times {
+    display: none;
+    gap: 1.5rem;
+    font-size: 0.75rem;
+    
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+}
+
+.main-nav {
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    .logo-icon {
+      width: 3rem;
+      height: 3rem;
+      background-color: $primary-600;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      mat-icon {
+        color: $white;
+      }
+    }
+    
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    p {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+  }
+  
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+    
+    @media (min-width: 1024px) {
+      display: flex;
+    }
+    
+    a, button {
+      font-weight: 500;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $primary-600;
+      }
+      
+      &.text-white:hover {
+        color: $primary-300;
+      }
+    }
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    mat-icon {
+      color: $orange-500;
+    }
+  }
+}
+
+.mobile-nav {
+  background-color: $white;
+  box-shadow: $shadow-lg;
+  
+  nav {
+    padding: 1rem;
+    
+    a {
+      display: block;
+      padding: 0.5rem 0;
+      color: $gray-800;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $primary-600;
+      }
+    }
+    
+    .mobile-donate {
+      padding-top: 1rem;
+      border-top: 1px solid $gray-200;
+    }
+  }
+}

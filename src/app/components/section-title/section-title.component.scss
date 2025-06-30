@@ -1,0 +1,27 @@
+@import '../../../styles/colors';
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: $gray-800;
+    margin-bottom: 1.5rem;
+    
+    .text-gradient {
+      background: $gradient-primary;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  
+  p {
+    font-size: 1.25rem;
+    color: $gray-600;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}

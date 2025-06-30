@@ -1,0 +1,47 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Angular Material Theme */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Custom styles */
+html, body { 
+  height: 100%; 
+  font-family: 'Inter', sans-serif;
+}
+
+body { 
+  margin: 0; 
+  background-color: #f8fafc;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-white hover:bg-gray-50 text-primary-600 font-medium py-3 px-6 rounded-lg border border-primary-600 transition-all duration-300;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Section spacing */
+.section-padding {
+  @apply py-16 px-4 sm:px-6 lg:px-8;
+}
+
+/* Text gradients */
+.text-gradient {
+  @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+}
