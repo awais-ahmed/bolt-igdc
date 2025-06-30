@@ -36,6 +36,11 @@ export class SeoService {
     this.initializeRouterSEO();
   }
 
+  /**
+   * INIZIALIZZAZIONE SEO
+   * Configura l'ascolto dei cambi di rotta per aggiornare automaticamente
+   * l'URL canonico quando l'utente naviga tra le pagine
+   */
   private initializeRouterSEO() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -44,18 +49,27 @@ export class SeoService {
       });
   }
 
+  /**
+   * AGGIORNAMENTO SEO PRINCIPALE
+   * Questa è la funzione principale che ogni pagina dovrebbe chiamare
+   * nel suo ngOnInit() per configurare tutti i meta tag SEO
+   * 
+   * @param seoData - Dati SEO specifici per la pagina
+   */
   updateSEO(seoData: Partial<SEOData>) {
+    // Combina i dati di default con quelli specifici della pagina
     const data = { ...this.defaultSEO, ...seoData };
     
-    // Update title
+    // 1. TITLE TAG - Il più importante per SEO
     this.title.setTitle(data.title);
     
-    // Update meta tags
+    // 2. META TAG FONDAMENTALI
     this.updateMetaTag('description', data.description);
     this.updateMetaTag('keywords', data.keywords || '');
     this.updateMetaTag('author', data.author || '');
     
-    // Open Graph tags
+    // 3. OPEN GRAPH TAGS (per Facebook, LinkedIn, etc.)
+    // Questi tag controllano come appare il link quando condiviso sui social
     this.updateMetaTag('og:title', data.title, 'property');
     this.updateMetaTag('og:description', data.description, 'property');
     this.updateMetaTag('og:image', data.image || '', 'property');
@@ -64,13 +78,14 @@ export class SeoService {
     this.updateMetaTag('og:site_name', 'Il Giardino della Conoscenza', 'property');
     this.updateMetaTag('og:locale', 'it_IT', 'property');
     
-    // Twitter Card tags
+    // 4. TWITTER CARD TAGS (per Twitter)
+    // Controllano come appare il link quando condiviso su Twitter
     this.updateMetaTag('twitter:card', 'summary_large_image', 'name');
     this.updateMetaTag('twitter:title', data.title, 'name');
     this.updateMetaTag('twitter:description', data.description, 'name');
     this.updateMetaTag('twitter:image', data.image || '', 'name');
     
-    // Article specific tags
+    // 5. ARTICLE TAGS (per blog post e articoli)
     if (data.publishedTime) {
       this.updateMetaTag('article:published_time', data.publishedTime, 'property');
     }
@@ -78,43 +93,70 @@ export class SeoService {
       this.updateMetaTag('article:modified_time', data.modifiedTime, 'property');
     }
     
-    // Robots meta tag
+    // 6. ROBOTS META TAG - Dice ai motori di ricerca cosa fare
     this.updateMetaTag('robots', 'index, follow');
     
-    // Language
+    // 7. LANGUAGE TAG
     this.updateMetaTag('language', 'Italian');
   }
 
+  /**
+   * HELPER PER AGGIORNARE META TAG
+   * Funzione di utilità che aggiorna o crea meta tag
+   * 
+   * @param name - Nome del meta tag
+   * @param content - Contenuto del meta tag
+   * @param attribute - Tipo di attributo ('name' o 'property')
+   */
   private updateMetaTag(name: string, content: string, attribute: string = 'name') {
     if (content) {
+      // Controlla se il tag esiste già
       if (this.meta.getTag(`${attribute}="${name}"`)) {
+        // Aggiorna il tag esistente
         this.meta.updateTag({ [attribute]: name, content });
       } else {
+        // Crea un nuovo tag
         this.meta.addTag({ [attribute]: name, content });
       }
     }
   }
 
+  /**
+   * AGGIORNAMENTO URL CANONICO
+   * L'URL canonico dice ai motori di ricerca qual è la versione "ufficiale"
+   * di una pagina, evitando problemi di contenuto duplicato
+   * 
+   * @param url - URL della pagina corrente
+   */
   private updateCanonicalUrl(url: string) {
     const canonicalUrl = `https://giardinoconoscenza.it${url}`;
     
-    // Remove existing canonical link
+    // Rimuove il link canonico esistente
     const existingCanonical = document.querySelector('link[rel="canonical"]');
     if (existingCanonical) {
       existingCanonical.remove();
     }
     
-    // Add new canonical link
+    // Aggiunge il nuovo link canonico
     const link = document.createElement('link');
     link.setAttribute('rel', 'canonical');
     link.setAttribute('href', canonicalUrl);
     document.head.appendChild(link);
     
-    // Update og:url
+    // Aggiorna anche og:url per coerenza
     this.updateMetaTag('og:url', canonicalUrl, 'property');
   }
 
-  generateStructuredData(type: 'Organization' | 'Article' | 'Event', data: any) {
+  /**
+   * STRUCTURED DATA (Schema.org)
+   * I dati strutturati aiutano i motori di ricerca a capire meglio
+   * il contenuto del sito e possono generare rich snippets nei risultati
+   * 
+   * @param type - Tipo di schema (Organization, Article, Event, etc.)
+   * @param data - Dati specifici per il tipo di schema
+   */
+  generateStructuredData(type: 'Organization' | 'Article' | 'Event' | 'LocalBusiness', data: any) {
+    // Rimuove lo script esistente se presente
     const existingScript = document.querySelector('script[type="application/ld+json"]');
     if (existingScript) {
       existingScript.remove();
@@ -124,6 +166,7 @@ export class SeoService {
 
     switch (type) {
       case 'Organization':
+        // Schema per organizzazioni/aziende
         structuredData = {
           "@context": "https://schema.org",
           "@type": "Organization",
@@ -152,6 +195,7 @@ export class SeoService {
         break;
       
       case 'Article':
+        // Schema per articoli del blog
         structuredData = {
           "@context": "https://schema.org",
           "@type": "Article",
@@ -174,13 +218,107 @@ export class SeoService {
           "dateModified": data.modifiedTime || data.publishedTime
         };
         break;
+
+      case 'LocalBusiness':
+        // Schema per attività locali
+        structuredData = {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Il Giardino della Conoscenza",
+          "description": "Associazione no profit dedicata all'educazione e alla crescita culturale della comunità",
+          "url": "https://giardinoconoscenza.it",
+          "telephone": "+39 02 1234 5678",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via della Conoscenza, 26",
+            "addressLocality": "Milano",
+            "postalCode": "20100",
+            "addressCountry": "IT"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "45.4642",
+            "longitude": "9.1900"
+          },
+          "openingHours": "Mo-Fr 09:00-18:00",
+          "priceRange": "€"
+        };
+        break;
     }
 
+    // Aggiunge lo script con i dati strutturati al DOM
     if (structuredData) {
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.text = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
+  }
+
+  /**
+   * BREADCRUMB STRUCTURED DATA
+   * Genera i dati strutturati per le breadcrumb (percorso di navigazione)
+   * 
+   * @param breadcrumbs - Array di oggetti con name e url
+   */
+  generateBreadcrumbStructuredData(breadcrumbs: Array<{name: string, url: string}>) {
+    const breadcrumbStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.name,
+        "item": item.url
+      }))
+    };
+
+    // Rimuove breadcrumb esistenti
+    const existingBreadcrumb = document.querySelector('script[data-type="breadcrumb"]');
+    if (existingBreadcrumb) {
+      existingBreadcrumb.remove();
+    }
+
+    // Aggiunge nuove breadcrumb
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-type', 'breadcrumb');
+    script.text = JSON.stringify(breadcrumbStructuredData);
+    document.head.appendChild(script);
+  }
+
+  /**
+   * FAQ STRUCTURED DATA
+   * Genera i dati strutturati per le FAQ che possono apparire
+   * come rich snippets nei risultati di ricerca
+   * 
+   * @param faqs - Array di oggetti con question e answer
+   */
+  generateFAQStructuredData(faqs: Array<{question: string, answer: string}>) {
+    const faqStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    // Rimuove FAQ esistenti
+    const existingFAQ = document.querySelector('script[data-type="faq"]');
+    if (existingFAQ) {
+      existingFAQ.remove();
+    }
+
+    // Aggiunge nuove FAQ
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-type', 'faq');
+    script.text = JSON.stringify(faqStructuredData);
+    document.head.appendChild(script);
   }
 }

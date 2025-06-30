@@ -1,0 +1,25 @@
+<div class="pt-24">
+  <!-- Hero Section -->
+  <app-page-hero
+    [title]="texts.FACILITIES.TITLE"
+    [description]="texts.FACILITIES.HERO_DESCRIPTION">
+  </app-page-hero>
+
+  <!-- Facilities Grid -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <app-facility-card 
+          *ngFor="let facility of facilities" 
+          [facility]="facility">
+        </app-facility-card>
+      </div>
+
+      <div class="text-center mt-12">
+        <button mat-raised-button class="btn-primary">
+          {{ texts.FACILITIES.MORE_FACILITIES }}
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

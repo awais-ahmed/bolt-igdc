@@ -7,7 +7,7 @@ import { ServiceCardComponent } from '../../components/service-card/service-card
 import { SITE_TEXTS } from '../../shared/constants/texts';
 import { SERVICES_DATA } from '../../shared/constants/data';
 import { SeoService } from '../../shared/services/seo.service';
-import { SEO_DATA } from '../../shared/constants/seo-data';
+import { SEO_DATA, BREADCRUMB_DATA } from '../../shared/constants/seo-data';
 
 @Component({
   selector: 'app-services',
@@ -17,28 +17,8 @@ import { SEO_DATA } from '../../shared/constants/seo-data';
     PageHeroComponent,
     ServiceCardComponent
   ],
-  template: `
-    <div class="pt-24">
-      <!-- Hero Section -->
-      <app-page-hero
-        [title]="texts.SERVICES.TITLE"
-        [description]="texts.SERVICES.HERO_DESCRIPTION">
-      </app-page-hero>
-
-      <!-- Services Grid -->
-      <section class="section-padding bg-white">
-        <div class="max-w-7xl mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <app-service-card 
-              *ngFor="let service of services" 
-              [service]="service"
-              [buttonText]="texts.SERVICES.DISCOVER_MORE">
-            </app-service-card>
-          </div>
-        </div>
-      </section>
-    </div>
-  `
+  templateUrl: './services.component.html',
+  styleUrl: './services.component.scss'
 })
 export class ServicesComponent implements OnInit {
   texts = SITE_TEXTS;
@@ -47,6 +27,43 @@ export class ServicesComponent implements OnInit {
   constructor(private seoService: SeoService) {}
 
   ngOnInit() {
+    // CONFIGURAZIONE SEO PER LA PAGINA SERVIZI
+    
+    // 1. Aggiorna i meta tag SEO
     this.seoService.updateSEO(SEO_DATA['services']);
+    
+    // 2. Genera le breadcrumb
+    this.seoService.generateBreadcrumbStructuredData(BREADCRUMB_DATA['services']);
+    
+    // 3. Genera dati strutturati per i servizi
+    // Questo può aiutare Google a mostrare i nostri servizi nei risultati
+    const servicesStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Educational Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "Il Giardino della Conoscenza"
+      },
+      "areaServed": "Milano, Italy",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Educational Services",
+        "itemListElement": this.services.map(service => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": service.title,
+            "description": service.description
+          }
+        }))
+      }
+    };
+    
+    // Aggiunge manualmente i dati strutturati per i servizi
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(servicesStructuredData);
+    document.head.appendChild(script);
   }
 }

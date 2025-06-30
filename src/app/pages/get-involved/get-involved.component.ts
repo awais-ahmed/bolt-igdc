@@ -9,7 +9,7 @@ import { GetInvolvedCardComponent } from '../../components/get-involved-card/get
 import { SITE_TEXTS } from '../../shared/constants/texts';
 import { GET_INVOLVED_DATA } from '../../shared/constants/data';
 import { SeoService } from '../../shared/services/seo.service';
-import { SEO_DATA } from '../../shared/constants/seo-data';
+import { SEO_DATA, BREADCRUMB_DATA } from '../../shared/constants/seo-data';
 
 @Component({
   selector: 'app-get-involved',
@@ -21,49 +21,8 @@ import { SEO_DATA } from '../../shared/constants/seo-data';
     SectionTitleComponent,
     GetInvolvedCardComponent
   ],
-  template: `
-    <div class="pt-24">
-      <!-- Hero Section -->
-      <app-page-hero
-        [title]="texts.GET_INVOLVED.TITLE"
-        [description]="texts.GET_INVOLVED.HERO_DESCRIPTION">
-      </app-page-hero>
-
-      <!-- Ways to Get Involved -->
-      <section class="section-padding bg-white">
-        <div class="max-w-7xl mx-auto">
-          <app-section-title
-            [title]="texts.GET_INVOLVED.HOW_TO_HELP_TITLE">
-          </app-section-title>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <app-get-involved-card 
-              *ngFor="let item of getInvolvedItems" 
-              [item]="item">
-            </app-get-involved-card>
-          </div>
-        </div>
-      </section>
-
-      <!-- Call to Action -->
-      <section class="section-padding bg-gray-50">
-        <div class="max-w-4xl mx-auto text-center">
-          <app-section-title
-            [title]="texts.GET_INVOLVED.CTA_TITLE"
-            [description]="texts.GET_INVOLVED.CTA_DESCRIPTION">
-          </app-section-title>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button mat-raised-button class="btn-primary text-lg px-8 py-4">
-              {{ texts.GET_INVOLVED.CONTACT_NOW }}
-            </button>
-            <button mat-raised-button class="btn-secondary text-lg px-8 py-4">
-              {{ texts.GET_INVOLVED.LEARN_MORE }}
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-  `
+  templateUrl: './get-involved.component.html',
+  styleUrl: './get-involved.component.scss'
 })
 export class GetInvolvedComponent implements OnInit {
   texts = SITE_TEXTS;
@@ -72,6 +31,40 @@ export class GetInvolvedComponent implements OnInit {
   constructor(private seoService: SeoService) {}
 
   ngOnInit() {
+    // CONFIGURAZIONE SEO PER LA PAGINA COINVOLGITI
+    
+    // 1. Aggiorna i meta tag SEO
     this.seoService.updateSEO(SEO_DATA['getInvolved']);
+    
+    // 2. Genera le breadcrumb
+    this.seoService.generateBreadcrumbStructuredData(BREADCRUMB_DATA['getInvolved']);
+    
+    // 3. Genera dati strutturati per le opportunità di volontariato
+    const volunteerStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "VolunteerOpportunity",
+      "name": "Opportunità di Volontariato - Il Giardino della Conoscenza",
+      "description": "Unisciti a noi come volontario e aiuta la comunità attraverso l'educazione e il supporto sociale",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Il Giardino della Conoscenza"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Milano",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Milano",
+          "addressCountry": "IT"
+        }
+      },
+      "skills": this.getInvolvedItems.map(item => item.title)
+    };
+    
+    // Aggiunge i dati strutturati per il volontariato
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(volunteerStructuredData);
+    document.head.appendChild(script);
   }
 }

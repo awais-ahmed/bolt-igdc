@@ -1,0 +1,56 @@
+<!-- Hero Section -->
+<app-hero-section
+  [title]="texts.HOME.HERO_TITLE"
+  [highlightedTitle]="texts.HOME.HERO_SUBTITLE"
+  [description]="texts.HOME.HERO_DESCRIPTION"
+  [backgroundImage]="'https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'"
+  [showButton]="true"
+  [buttonText]="texts.NAV.DONATE_NOW"
+  [isDonateButton]="true">
+</app-hero-section>
+
+<!-- What is IGDC Section -->
+<app-image-text-section
+  [title]="texts.HOME.WHAT_IS_IGDC_TITLE"
+  [paragraphs]="whatIsIgdcParagraphs"
+  [imageUrl]="'https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'"
+  [imageAlt]="'Il nostro centro'"
+  [showButton]="true"
+  [buttonText]="texts.NAV.GET_INVOLVED">
+</app-image-text-section>
+
+<!-- Vision Section -->
+<app-image-text-section
+  [title]="texts.HOME.VISION_TITLE"
+  [paragraphs]="visionParagraphs"
+  [imageUrl]="'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'"
+  [imageAlt]="'La nostra visione'"
+  [imageOnLeft]="false"
+  [showButton]="true"
+  [buttonText]="'STRUTTURE'"
+  [sectionClass]="'bg-primary-800 text-white'"
+  [titleClass]="'text-4xl font-bold mb-6'"
+  [textClass]="'text-primary-100'"
+  [buttonClass]="'bg-white text-primary-800 hover:bg-gray-100 font-medium px-6 py-3'">
+</app-image-text-section>
+
+<!-- Facilities Preview -->
+<section class="section-padding bg-white">
+  <div class="max-w-7xl mx-auto text-center">
+    <app-section-title
+      [title]="'Strutture '"
+      [highlightedText]="'IGDC'">
+    </app-section-title>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <app-facility-card 
+        *ngFor="let facility of facilitiesPreview" 
+        [facility]="facility">
+      </app-facility-card>
+    </div>
+
+    <button mat-raised-button class="btn-primary">
+      {{ texts.HOME.MORE_FACILITIES }}
+    </button>
+  </div>
+</section>

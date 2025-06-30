@@ -1,0 +1,72 @@
+@import '../../../styles/colors';
+
+// About page specific styles
+.about-page {
+  .mission-section {
+    background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+    
+    .mission-content {
+      max-width: 4xl;
+      margin: 0 auto;
+    }
+  }
+  
+  .values-section {
+    background: $gray-50;
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+// Value cards enhancement
+.value-card {
+  background: $white;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: $shadow-md;
+  transition: all 0.3s ease;
+  border: 1px solid $gray-100;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+    border-color: $primary-200;
+  }
+  
+  .value-icon {
+    width: 4rem;
+    height: 4rem;
+    background: $primary-100;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    
+    mat-icon {
+      color: $primary-600;
+      font-size: 2rem;
+    }
+  }
+  
+  .value-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $gray-800;
+    margin-bottom: 1rem;
+  }
+  
+  .value-description {
+    color: $gray-600;
+    line-height: 1.6;
+  }
+}

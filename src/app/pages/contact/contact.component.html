@@ -1,0 +1,157 @@
+<div class="pt-24">
+  <!-- Hero Section with Contact Form -->
+  <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+    <div class="absolute inset-0 bg-cover bg-center" 
+         style="background-image: url('https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');">
+    </div>
+    
+    <div class="relative z-10 max-w-4xl mx-auto px-4">
+      <div class="text-center text-white mb-8">
+        <h1 class="text-5xl font-bold mb-4">{{ texts.CONTACT.TITLE }}</h1>
+        <p class="text-xl opacity-90">{{ texts.CONTACT.HERO_DESCRIPTION }}</p>
+      </div>
+
+      <!-- Contact Form -->
+      <mat-card class="p-8">
+        <mat-card-header class="text-center mb-6">
+          <mat-card-title class="text-2xl font-bold text-primary-800">
+            {{ texts.CONTACT.FORM_TITLE }}
+          </mat-card-title>
+        </mat-card-header>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          <!-- First Row -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.TITLE }}</mat-label>
+              <mat-select formControlName="title">
+                <mat-option value="Mr">Sig.</mat-option>
+                <mat-option value="Mrs">Sig.ra</mat-option>
+                <mat-option value="Ms">Sig.na</mat-option>
+                <mat-option value="Dr">Dott.</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.FIRST_NAME }}</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+                {{ texts.CONTACT.FORM_ERRORS.FIRST_NAME_REQUIRED }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.LAST_NAME }}</mat-label>
+              <input matInput formControlName="lastName" required>
+              <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
+                {{ texts.CONTACT.FORM_ERRORS.LAST_NAME_REQUIRED }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Second Row -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.EMAIL }}</mat-label>
+              <input matInput type="email" formControlName="email" required>
+              <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                {{ texts.CONTACT.FORM_ERRORS.EMAIL_REQUIRED }}
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                {{ texts.CONTACT.FORM_ERRORS.EMAIL_INVALID }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.SUBJECT }}</mat-label>
+              <input matInput formControlName="subject" required>
+              <mat-error *ngIf="contactForm.get('subject')?.hasError('required')">
+                {{ texts.CONTACT.FORM_ERRORS.SUBJECT_REQUIRED }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ texts.CONTACT.FORM_LABELS.PHONE }}</mat-label>
+              <input matInput formControlName="phone" required>
+              <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
+                {{ texts.CONTACT.FORM_ERRORS.PHONE_REQUIRED }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Message -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{ texts.CONTACT.FORM_LABELS.MESSAGE }}</mat-label>
+            <textarea matInput rows="6" formControlName="message" placeholder="Scrivi qui il tuo messaggio..."></textarea>
+          </mat-form-field>
+
+          <!-- Checkbox -->
+          <div class="flex items-start space-x-3">
+            <mat-checkbox formControlName="agreement" class="mt-1">
+              {{ texts.CONTACT.FORM_LABELS.AGREEMENT }}
+            </mat-checkbox>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-right">
+            <button mat-raised-button 
+                    type="submit" 
+                    class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3"
+                    [disabled]="!contactForm.valid">
+              {{ texts.CONTACT.SUBMIT }}
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Contact Information -->
+  <section class="bg-primary-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        
+        <app-contact-info-card
+          [icon]="'location_on'"
+          [title]="texts.CONTACT.CONTACT_INFO.ADDRESS"
+          [content]="texts.CONTACT.CONTACT_INFO.ADDRESS_VALUE">
+        </app-contact-info-card>
+
+        <app-contact-info-card
+          [icon]="'phone'"
+          [title]="texts.CONTACT.CONTACT_INFO.PHONE"
+          [content]="texts.CONTACT.CONTACT_INFO.PHONE_VALUE">
+        </app-contact-info-card>
+
+        <app-contact-info-card
+          [icon]="'email'"
+          [title]="texts.CONTACT.CONTACT_INFO.EMAIL"
+          [content]="texts.CONTACT.CONTACT_INFO.EMAIL_VALUE">
+        </app-contact-info-card>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+        {{ texts.CONTACT.FAQ_TITLE }}
+      </h2>
+
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let faq of faqs; let i = index" 
+                             [expanded]="i === 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="text-lg font-medium">
+              {{ faq.question }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p class="text-gray-600 leading-relaxed">{{ faq.answer }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </section>
+</div>

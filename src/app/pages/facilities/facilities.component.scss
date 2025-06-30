@@ -1,0 +1,84 @@
+@import '../../../styles/colors';
+
+// Facilities page specific styles
+.facilities-page {
+  .facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .more-facilities-section {
+    text-align: center;
+    margin-top: 3rem;
+    
+    .more-facilities-btn {
+      background: $gradient-primary;
+      color: $white;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      box-shadow: $shadow-lg;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-xl;
+      }
+    }
+  }
+}
+
+// Facility card enhancements
+.facility-card {
+  background: $white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  transition: all 0.3s ease;
+  border: 1px solid $gray-100;
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $shadow-xl;
+    border-color: $primary-200;
+  }
+  
+  .facility-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover .facility-image {
+    transform: scale(1.05);
+  }
+  
+  .facility-content {
+    padding: 1.5rem;
+    
+    .facility-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $gray-800;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    
+    .facility-description {
+      color: $gray-600;
+      line-height: 1.6;
+      font-size: 0.875rem;
+    }
+  }
+}

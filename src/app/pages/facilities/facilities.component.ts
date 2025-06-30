@@ -8,7 +8,7 @@ import { FacilityCardComponent } from '../../components/facility-card/facility-c
 import { SITE_TEXTS } from '../../shared/constants/texts';
 import { FACILITIES_DATA } from '../../shared/constants/data';
 import { SeoService } from '../../shared/services/seo.service';
-import { SEO_DATA } from '../../shared/constants/seo-data';
+import { SEO_DATA, BREADCRUMB_DATA } from '../../shared/constants/seo-data';
 
 @Component({
   selector: 'app-facilities',
@@ -19,33 +19,8 @@ import { SEO_DATA } from '../../shared/constants/seo-data';
     PageHeroComponent,
     FacilityCardComponent
   ],
-  template: `
-    <div class="pt-24">
-      <!-- Hero Section -->
-      <app-page-hero
-        [title]="texts.FACILITIES.TITLE"
-        [description]="texts.FACILITIES.HERO_DESCRIPTION">
-      </app-page-hero>
-
-      <!-- Facilities Grid -->
-      <section class="section-padding bg-white">
-        <div class="max-w-7xl mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <app-facility-card 
-              *ngFor="let facility of facilities" 
-              [facility]="facility">
-            </app-facility-card>
-          </div>
-
-          <div class="text-center mt-12">
-            <button mat-raised-button class="btn-primary">
-              {{ texts.FACILITIES.MORE_FACILITIES }}
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-  `
+  templateUrl: './facilities.component.html',
+  styleUrl: './facilities.component.scss'
 })
 export class FacilitiesComponent implements OnInit {
   texts = SITE_TEXTS;
@@ -54,6 +29,38 @@ export class FacilitiesComponent implements OnInit {
   constructor(private seoService: SeoService) {}
 
   ngOnInit() {
+    // CONFIGURAZIONE SEO PER LA PAGINA STRUTTURE
+    
+    // 1. Aggiorna i meta tag SEO
     this.seoService.updateSEO(SEO_DATA['facilities']);
+    
+    // 2. Genera le breadcrumb
+    this.seoService.generateBreadcrumbStructuredData(BREADCRUMB_DATA['facilities']);
+    
+    // 3. Genera dati strutturati per le strutture/luoghi
+    const facilitiesStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "Place",
+      "name": "Il Giardino della Conoscenza - Strutture",
+      "description": "Centro educativo con moderne strutture per l'apprendimento e la crescita della comunità",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via della Conoscenza, 26",
+        "addressLocality": "Milano",
+        "postalCode": "20100",
+        "addressCountry": "IT"
+      },
+      "amenityFeature": this.facilities.map(facility => ({
+        "@type": "LocationFeatureSpecification",
+        "name": facility.title,
+        "value": facility.description
+      }))
+    };
+    
+    // Aggiunge i dati strutturati per le strutture
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(facilitiesStructuredData);
+    document.head.appendChild(script);
   }
 }

@@ -1,0 +1,20 @@
+<div class="pt-24">
+  <!-- Hero Section -->
+  <app-page-hero
+    [title]="texts.SERVICES.TITLE"
+    [description]="texts.SERVICES.HERO_DESCRIPTION">
+  </app-page-hero>
+
+  <!-- Services Grid -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <app-service-card 
+          *ngFor="let service of services" 
+          [service]="service"
+          [buttonText]="texts.SERVICES.DISCOVER_MORE">
+        </app-service-card>
+      </div>
+    </div>
+  </section>
+</div>
