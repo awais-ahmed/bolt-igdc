@@ -1,0 +1,476 @@
+// =============================================================================
+// DESIGN SYSTEM - Il Giardino della Conoscenza
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// BRAND COLORS (Colori forniti dal cliente)
+// -----------------------------------------------------------------------------
+$brand-light-green: #9ECE51;
+$brand-dark-green: #009444;
+$brand-dark-grey: #939598;
+$brand-light-grey: #BCBEC0;
+
+// -----------------------------------------------------------------------------
+// PALETTE COLORI ESTESA
+// -----------------------------------------------------------------------------
+
+// Primary Colors (basati sul Light Green)
+$primary-50: #f7fcf0;
+$primary-100: #ecf7d4;
+$primary-200: #ddf2ae;
+$primary-300: #c8e97d;
+$primary-400: #b5e055;
+$primary-500: #9ECE51; // Brand Light Green
+$primary-600: #7fb842;
+$primary-700: #6a9937;
+$primary-800: #567a2f;
+$primary-900: #4a6529;
+
+// Secondary Colors (basati sul Dark Green)
+$secondary-50: #f0fdf4;
+$secondary-100: #dcfce7;
+$secondary-200: #bbf7d0;
+$secondary-300: #86efac;
+$secondary-400: #4ade80;
+$secondary-500: #22c55e;
+$secondary-600: #009444; // Brand Dark Green
+$secondary-700: #15803d;
+$secondary-800: #166534;
+$secondary-900: #14532d;
+
+// Neutral Colors (basati sui grigi forniti)
+$neutral-50: #fafafa;
+$neutral-100: #f5f5f5;
+$neutral-200: #e5e5e5;
+$neutral-300: #d4d4d4;
+$neutral-400: #BCBEC0; // Brand Light Grey
+$neutral-500: #a3a3a3;
+$neutral-600: #939598; // Brand Dark Grey
+$neutral-700: #525252;
+$neutral-800: #404040;
+$neutral-900: #262626;
+
+// Semantic Colors
+$success-50: #f0fdf4;
+$success-500: #22c55e;
+$success-600: #16a34a;
+$success-700: #15803d;
+
+$warning-50: #fffbeb;
+$warning-500: #f59e0b;
+$warning-600: #d97706;
+$warning-700: #b45309;
+
+$error-50: #fef2f2;
+$error-500: #ef4444;
+$error-600: #dc2626;
+$error-700: #b91c1c;
+
+$info-50: #eff6ff;
+$info-500: #3b82f6;
+$info-600: #2563eb;
+$info-700: #1d4ed8;
+
+// Base Colors
+$white: #ffffff;
+$black: #000000;
+$transparent: transparent;
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY SYSTEM
+// -----------------------------------------------------------------------------
+
+// Font Family
+$font-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-secondary: 'Open Sans', sans-serif;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Font Sizes
+$text-xs: 0.75rem;    // 12px
+$text-sm: 0.875rem;   // 14px
+$text-base: 1rem;     // 16px
+$text-lg: 1.125rem;   // 18px
+$text-xl: 1.25rem;    // 20px
+$text-2xl: 1.5rem;    // 24px
+$text-3xl: 1.875rem;  // 30px
+$text-4xl: 2.25rem;   // 36px
+$text-5xl: 3rem;      // 48px
+$text-6xl: 3.75rem;   // 60px
+
+// Line Heights
+$leading-none: 1;
+$leading-tight: 1.25;
+$leading-snug: 1.375;
+$leading-normal: 1.5;
+$leading-relaxed: 1.625;
+$leading-loose: 2;
+
+// -----------------------------------------------------------------------------
+// SPACING SYSTEM (8px grid)
+// -----------------------------------------------------------------------------
+$space-0: 0;
+$space-1: 0.25rem;  // 4px
+$space-2: 0.5rem;   // 8px
+$space-3: 0.75rem;  // 12px
+$space-4: 1rem;     // 16px
+$space-5: 1.25rem;  // 20px
+$space-6: 1.5rem;   // 24px
+$space-8: 2rem;     // 32px
+$space-10: 2.5rem;  // 40px
+$space-12: 3rem;    // 48px
+$space-16: 4rem;    // 64px
+$space-20: 5rem;    // 80px
+$space-24: 6rem;    // 96px
+$space-32: 8rem;    // 128px
+
+// -----------------------------------------------------------------------------
+// BORDER RADIUS
+// -----------------------------------------------------------------------------
+$radius-none: 0;
+$radius-sm: 0.125rem;   // 2px
+$radius-base: 0.25rem;  // 4px
+$radius-md: 0.375rem;   // 6px
+$radius-lg: 0.5rem;     // 8px
+$radius-xl: 0.75rem;    // 12px
+$radius-2xl: 1rem;      // 16px
+$radius-3xl: 1.5rem;    // 24px
+$radius-full: 9999px;
+
+// -----------------------------------------------------------------------------
+// SHADOWS
+// -----------------------------------------------------------------------------
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// Colored Shadows
+$shadow-primary: 0 10px 15px -3px rgba($primary-500, 0.1);
+$shadow-secondary: 0 10px 15px -3px rgba($secondary-600, 0.1);
+
+// -----------------------------------------------------------------------------
+// GRADIENTS
+// -----------------------------------------------------------------------------
+$gradient-primary: linear-gradient(135deg, #{$primary-500} 0%, #{$secondary-600} 100%);
+$gradient-primary-light: linear-gradient(135deg, #{$primary-400} 0%, #{$primary-600} 100%);
+$gradient-secondary: linear-gradient(135deg, #{$secondary-600} 0%, #{$secondary-800} 100%);
+$gradient-neutral: linear-gradient(135deg, #{$neutral-100} 0%, #{$neutral-200} 100%);
+
+// -----------------------------------------------------------------------------
+// COMPONENT TOKENS
+// -----------------------------------------------------------------------------
+
+// Buttons
+$btn-padding-sm: #{$space-2} #{$space-4};
+$btn-padding-md: #{$space-3} #{$space-6};
+$btn-padding-lg: #{$space-4} #{$space-8};
+
+$btn-font-size-sm: $text-sm;
+$btn-font-size-md: $text-base;
+$btn-font-size-lg: $text-lg;
+
+$btn-border-radius: $radius-lg;
+$btn-font-weight: $font-weight-medium;
+
+// Cards
+$card-padding: $space-6;
+$card-border-radius: $radius-xl;
+$card-shadow: $shadow-md;
+$card-shadow-hover: $shadow-lg;
+
+// Forms
+$form-border-radius: $radius-md;
+$form-border-color: $neutral-300;
+$form-border-color-focus: $primary-500;
+$form-padding: #{$space-3} #{$space-4};
+
+// -----------------------------------------------------------------------------
+// UTILITY CLASSES
+// -----------------------------------------------------------------------------
+
+// Text Colors
+.text-primary { color: $primary-500; }
+.text-primary-dark { color: $primary-700; }
+.text-secondary { color: $secondary-600; }
+.text-neutral { color: $neutral-600; }
+.text-neutral-light { color: $neutral-400; }
+.text-white { color: $white; }
+.text-black { color: $black; }
+
+// Background Colors
+.bg-primary { background-color: $primary-500; }
+.bg-primary-light { background-color: $primary-100; }
+.bg-secondary { background-color: $secondary-600; }
+.bg-secondary-light { background-color: $secondary-100; }
+.bg-neutral { background-color: $neutral-100; }
+.bg-white { background-color: $white; }
+
+// Border Colors
+.border-primary { border-color: $primary-500; }
+.border-secondary { border-color: $secondary-600; }
+.border-neutral { border-color: $neutral-300; }
+
+// -----------------------------------------------------------------------------
+// COMPONENT MIXINS
+// -----------------------------------------------------------------------------
+
+// Button Mixin
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-primary;
+  font-weight: $btn-font-weight;
+  border-radius: $btn-border-radius;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $primary-500;
+  color: $white;
+  box-shadow: $shadow-sm;
+  
+  &:hover:not(:disabled) {
+    background-color: $primary-600;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: $secondary-600;
+  color: $white;
+  box-shadow: $shadow-sm;
+  
+  &:hover:not(:disabled) {
+    background-color: $secondary-700;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+}
+
+@mixin button-outline {
+  @include button-base;
+  background-color: transparent;
+  color: $primary-500;
+  border: 2px solid $primary-500;
+  
+  &:hover:not(:disabled) {
+    background-color: $primary-50;
+    border-color: $primary-600;
+    color: $primary-600;
+  }
+}
+
+// Card Mixin
+@mixin card-base {
+  background-color: $white;
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+  padding: $card-padding;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: $card-shadow-hover;
+    transform: translateY(-2px);
+  }
+}
+
+// Form Input Mixin
+@mixin input-base {
+  width: 100%;
+  padding: $form-padding;
+  border: 1px solid $form-border-color;
+  border-radius: $form-border-radius;
+  font-family: $font-primary;
+  font-size: $text-base;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $form-border-color-focus;
+    box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+  }
+  
+  &::placeholder {
+    color: $neutral-400;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// RESPONSIVE BREAKPOINTS
+// -----------------------------------------------------------------------------
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Responsive Mixins
+@mixin mobile {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// ANIMATION SYSTEM
+// -----------------------------------------------------------------------------
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;
+
+// Easing Functions
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+// Common Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
+  }
+}
+
+// Animation Classes
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// -----------------------------------------------------------------------------
+// ACCESSIBILITY
+// -----------------------------------------------------------------------------
+
+// Focus Styles
+@mixin focus-ring {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+}
+
+// Screen Reader Only
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  .btn-primary {
+    border: 2px solid $white;
+  }
+  
+  .card {
+    border: 1px solid $neutral-600;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// PRINT STYLES
+// -----------------------------------------------------------------------------
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: $black;
+    background: $white;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    border: 1px solid $black;
+    background: transparent !important;
+    color: $black !important;
+  }
+}

@@ -1,0 +1,510 @@
+// =============================================================================
+// COMPONENTS STYLES - Design System Implementation
+// =============================================================================
+
+@import './design-system';
+
+// -----------------------------------------------------------------------------
+// BUTTON COMPONENTS
+// -----------------------------------------------------------------------------
+
+.btn {
+  @include button-base;
+  
+  // Sizes
+  &--sm {
+    padding: $btn-padding-sm;
+    font-size: $btn-font-size-sm;
+  }
+  
+  &--md {
+    padding: $btn-padding-md;
+    font-size: $btn-font-size-md;
+  }
+  
+  &--lg {
+    padding: $btn-padding-lg;
+    font-size: $btn-font-size-lg;
+  }
+  
+  // Variants
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--outline {
+    @include button-outline;
+  }
+  
+  &--ghost {
+    @include button-base;
+    background-color: transparent;
+    color: $primary-500;
+    
+    &:hover:not(:disabled) {
+      background-color: $primary-50;
+      color: $primary-600;
+    }
+  }
+  
+  // States
+  &--loading {
+    position: relative;
+    color: transparent;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// -----------------------------------------------------------------------------
+// CARD COMPONENTS
+// -----------------------------------------------------------------------------
+
+.card {
+  @include card-base;
+  
+  &__header {
+    margin-bottom: $space-4;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $neutral-200;
+  }
+  
+  &__title {
+    font-size: $text-xl;
+    font-weight: $font-weight-semibold;
+    color: $neutral-800;
+    margin: 0;
+  }
+  
+  &__subtitle {
+    font-size: $text-sm;
+    color: $neutral-600;
+    margin: $space-1 0 0 0;
+  }
+  
+  &__content {
+    color: $neutral-700;
+    line-height: $leading-relaxed;
+  }
+  
+  &__footer {
+    margin-top: $space-4;
+    padding-top: $space-4;
+    border-top: 1px solid $neutral-200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  // Variants
+  &--elevated {
+    box-shadow: $shadow-lg;
+    
+    &:hover {
+      box-shadow: $shadow-xl;
+      transform: translateY(-4px);
+    }
+  }
+  
+  &--bordered {
+    border: 1px solid $neutral-200;
+    box-shadow: none;
+  }
+  
+  &--primary {
+    background: $gradient-primary;
+    color: $white;
+    
+    .card__title {
+      color: $white;
+    }
+    
+    .card__content {
+      color: rgba($white, 0.9);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// FORM COMPONENTS
+// -----------------------------------------------------------------------------
+
+.form-group {
+  margin-bottom: $space-4;
+}
+
+.form-label {
+  display: block;
+  font-size: $text-sm;
+  font-weight: $font-weight-medium;
+  color: $neutral-700;
+  margin-bottom: $space-2;
+}
+
+.form-input {
+  @include input-base;
+  
+  &--error {
+    border-color: $error-500;
+    
+    &:focus {
+      border-color: $error-500;
+      box-shadow: 0 0 0 3px rgba($error-500, 0.1);
+    }
+  }
+  
+  &--success {
+    border-color: $success-500;
+    
+    &:focus {
+      border-color: $success-500;
+      box-shadow: 0 0 0 3px rgba($success-500, 0.1);
+    }
+  }
+}
+
+.form-textarea {
+  @include input-base;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-select {
+  @include input-base;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px 12px;
+  padding-right: 40px;
+  appearance: none;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid $neutral-300;
+    border-radius: $radius-sm;
+    background-color: $white;
+    margin-top: 2px;
+    
+    &:checked {
+      background-color: $primary-500;
+      border-color: $primary-500;
+    }
+    
+    &:focus {
+      @include focus-ring;
+    }
+  }
+  
+  label {
+    font-size: $text-sm;
+    color: $neutral-700;
+    line-height: $leading-normal;
+  }
+}
+
+.form-error {
+  font-size: $text-sm;
+  color: $error-500;
+  margin-top: $space-1;
+}
+
+.form-help {
+  font-size: $text-sm;
+  color: $neutral-500;
+  margin-top: $space-1;
+}
+
+// -----------------------------------------------------------------------------
+// BADGE COMPONENTS
+// -----------------------------------------------------------------------------
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: #{$space-1} #{$space-2};
+  font-size: $text-xs;
+  font-weight: $font-weight-medium;
+  border-radius: $radius-full;
+  
+  &--primary {
+    background-color: $primary-100;
+    color: $primary-700;
+  }
+  
+  &--secondary {
+    background-color: $secondary-100;
+    color: $secondary-700;
+  }
+  
+  &--success {
+    background-color: $success-50;
+    color: $success-700;
+  }
+  
+  &--warning {
+    background-color: $warning-50;
+    color: $warning-700;
+  }
+  
+  &--error {
+    background-color: $error-50;
+    color: $error-700;
+  }
+  
+  &--neutral {
+    background-color: $neutral-100;
+    color: $neutral-700;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// ALERT COMPONENTS
+// -----------------------------------------------------------------------------
+
+.alert {
+  padding: $space-4;
+  border-radius: $radius-lg;
+  border: 1px solid transparent;
+  
+  &__title {
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-2;
+  }
+  
+  &__content {
+    font-size: $text-sm;
+    line-height: $leading-relaxed;
+  }
+  
+  &--success {
+    background-color: $success-50;
+    border-color: $success-200;
+    color: $success-800;
+  }
+  
+  &--warning {
+    background-color: $warning-50;
+    border-color: $warning-200;
+    color: $warning-800;
+  }
+  
+  &--error {
+    background-color: $error-50;
+    border-color: $error-200;
+    color: $error-800;
+  }
+  
+  &--info {
+    background-color: $info-50;
+    border-color: $info-200;
+    color: $info-800;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// NAVIGATION COMPONENTS
+// -----------------------------------------------------------------------------
+
+.nav {
+  display: flex;
+  
+  &__item {
+    position: relative;
+  }
+  
+  &__link {
+    display: flex;
+    align-items: center;
+    padding: #{$space-2} #{$space-4};
+    font-weight: $font-weight-medium;
+    color: $neutral-600;
+    text-decoration: none;
+    border-radius: $radius-md;
+    transition: all $transition-base;
+    
+    &:hover {
+      color: $primary-600;
+      background-color: $primary-50;
+    }
+    
+    &--active {
+      color: $primary-600;
+      background-color: $primary-100;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// LOADING COMPONENTS
+// -----------------------------------------------------------------------------
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid $neutral-200;
+  border-top-color: $primary-500;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &--lg {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, $neutral-200 25%, $neutral-100 50%, $neutral-200 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: $radius-md;
+  
+  &--text {
+    height: 1em;
+    margin-bottom: $space-2;
+    
+    &:last-child {
+      width: 60%;
+    }
+  }
+  
+  &--avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  &--button {
+    height: 40px;
+    width: 120px;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// UTILITY COMPONENTS
+// -----------------------------------------------------------------------------
+
+.divider {
+  height: 1px;
+  background-color: $neutral-200;
+  margin: $space-4 0;
+  
+  &--vertical {
+    width: 1px;
+    height: auto;
+    margin: 0 $space-4;
+  }
+  
+  &--thick {
+    height: 2px;
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: $neutral-200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-medium;
+  color: $neutral-600;
+  
+  &--sm {
+    width: 32px;
+    height: 32px;
+    font-size: $text-sm;
+  }
+  
+  &--lg {
+    width: 56px;
+    height: 56px;
+    font-size: $text-lg;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.tooltip {
+  position: relative;
+  
+  &__content {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $neutral-800;
+    color: $white;
+    padding: #{$space-2} #{$space-3};
+    border-radius: $radius-md;
+    font-size: $text-sm;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-base;
+    z-index: 1000;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: $neutral-800;
+    }
+  }
+  
+  &:hover .tooltip__content {
+    opacity: 1;
+    visibility: visible;
+  }
+}
