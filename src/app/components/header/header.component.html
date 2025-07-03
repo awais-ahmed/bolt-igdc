@@ -1,9 +1,11 @@
 <ng-container>
   <header class="fixed top-0 w-full z-50 transition-all duration-300" 
-          [class.bg-white/95]="isScrolled" 
-          [class.shadow-lg]="isScrolled"
-          [class.bg-black/20]="!isScrolled"
-          [class.backdrop-blur-sm]="!isScrolled">
+          [ngClass]="{
+          'bg-white/95': isScrolled,
+          'shadow-lg': isScrolled,
+          'bg-black/20': !isScrolled,
+          'backdrop-blur-sm': !isScrolled
+        }">
     
     <!-- Top bar with social links and prayer times -->
     <div class="bg-primary-800 text-white py-2 px-4 text-sm" *ngIf="!isScrolled">
